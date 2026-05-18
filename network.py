@@ -133,6 +133,16 @@ class Network(object):
         """Return the vector of partial derivatives partial C_x partial a for the output activations."""
         return (output_activations - y)
 
+    def predict(self, x):
+        """预测单个图片的数字
+        x: 输入向量 (784, 1) 形状的 numpy 数组
+        返回: (预测数字, 置信度)
+        """
+        output = self.feedforward(x)
+        digit = np.argmax(output)
+        confidence = np.max(output)
+        return digit, confidence
+
 
 # Miscellaneous functions
 def sigmoid(z):
